@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from dotenv import load_dotenv
+import os
 
 from routes.earthquakes import earthquakes_bp
 from routes.cities      import cities_bp
@@ -13,20 +14,21 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-# Register blueprints
 app.register_blueprint(earthquakes_bp, url_prefix='/api/earthquakes')
 app.register_blueprint(cities_bp,      url_prefix='/api/cities')
 app.register_blueprint(map_bp,         url_prefix='/api/map')
 app.register_blueprint(population_bp,  url_prefix='/api/population')
 app.register_blueprint(predict_bp,     url_prefix='/api/predict')
 
+# Start scheduler (works for both gunicorn and direct run)
+start_scheduler()
+
 @app.route('/api/health')
 def health():
-    scheduler_status = get_scheduler_status()
     return {
         'status':    'ok',
         'message':   'Seismowatch API running 🌍',
-        'scheduler': scheduler_status,
+        'scheduler': get_scheduler_status(),
     }
 
 @app.route('/api/scheduler/status')
@@ -34,9 +36,7 @@ def scheduler_status():
     return get_scheduler_status()
 
 if __name__ == '__main__':
-    import os
     port = int(os.environ.get('PORT', 5000))
-    start_scheduler()
     try:
         app.run(debug=False, host='0.0.0.0', port=port)
     finally:
