@@ -34,9 +34,10 @@ def scheduler_status():
     return get_scheduler_status()
 
 if __name__ == '__main__':
-    # Start background scheduler
+    import os
+    port = int(os.environ.get('PORT', 5000))
     start_scheduler()
     try:
-        app.run(debug=False, host='0.0.0.0', port=5000)
+        app.run(debug=False, host='0.0.0.0', port=port)
     finally:
         stop_scheduler()
