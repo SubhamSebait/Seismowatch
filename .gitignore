@@ -1,0 +1,25 @@
+# Python
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/**/*.pyc
+backend/data/risk_model.pkl
+backend/data/label_encoder.pkl
+
+# Data files (too large for GitHub)
+backend/data/*.csv
+backend/data/*.json
+
+# Node
+frontend/node_modules/
+
+# Env
+.env
+*.env
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
