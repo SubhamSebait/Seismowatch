@@ -3,8 +3,6 @@ backend/.venv/
 backend/__pycache__/
 backend/**/__pycache__/
 backend/**/*.pyc
-backend/data/risk_model.pkl
-backend/data/label_encoder.pkl
 
 # Data files (too large for GitHub)
 backend/data/*.csv

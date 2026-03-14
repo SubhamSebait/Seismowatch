@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
+from dotenv import load_dotenv
 
 from routes.earthquakes import earthquakes_bp
 from routes.cities      import cities_bp
@@ -8,6 +9,7 @@ from routes.population  import population_bp
 from routes.predict     import predict_bp
 from scheduler          import start_scheduler, stop_scheduler, get_scheduler_status
 
+load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
